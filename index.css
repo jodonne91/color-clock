@@ -1,0 +1,17 @@
+
+.background {
+	height: 100vh;
+}
+
+.clockDiv {
+	position: absolute;
+	left: 26%;
+	top: 20%;
+	color: white;
+	font-size: 4em;
+	border-bottom: 10px solid white;
+}
+
+h1 {
+	margin-bottom: 40px;
+}
