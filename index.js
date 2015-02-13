@@ -1,25 +1,69 @@
+//variables for which clock to display
+  var type = true;
 
+
+
+//set intervals and bind listeners on document ready
 
 $(document).on("ready", function() {
-  setInterval(setTime, 1000);
+
+
+  setInterval('setTime(type)', 1000);
+  setInterval('setHex(type)', 1000);
+
+  $(".clockDiv").click(function() {  
+    $(".clockDiv").toggleClass('hidden')
+    $(".hexDiv").toggleClass('hidden')
+  })
+
+  $(".hexDiv").click(function() {  
+    $(".clockDiv").toggleClass('hidden')
+    $(".hexDiv").toggleClass('hidden')
+  })
+
 })
+
+
+//Below are the functions for setting the elements displayed on screen
 
 function setTime() 
 {
   
-  var color = getColor();
-  var time = getTime();
+  {
+    var color = getColor();
+    var time = getTime();
+    // var hexColor = getHex();
 
+    var clockTime = "<h1 class = 'clock'>" + time + "</h1>";
+    // var hexCode = "<h1 class='hex'>" + hexColor + "</h1>"
+    $(".background").css("background-color", color);
 
-  var clockTime = "<h1 class = 'clock'>" + time + "</h1>";
-
-  $(".background").css("background-color", color);
-
-  $(".clock").remove()
-  $(".clockDiv").append(clockTime)
+    $(".clock").remove();
+    $(".clockDiv").append(clockTime);
+  }
 
 }
 
+function setHex()
+{
+
+  {  
+    var hexColor = getHex();
+    //var color = getColor();
+
+    // var clockTime = "<h1 class = 'clock'>" + time + "</h1>";
+    var hexCode = "<h1 class='hex'>" + hexColor + "</h1>"
+    //$(".background").css("background-color", color);
+
+    $(".hex").remove();
+    $(".hexDiv").append(hexCode);
+  }
+
+}
+
+
+
+//Below are the functions for producing the correct color and time codes
 
 function getColor() 
 {
@@ -40,6 +84,20 @@ function getColor()
 
 }
 
+function getHex() {
+
+   var time = new Date();
+   var h = time.getHours();
+   var m = time.getMinutes();
+   var s = time.getSeconds();
+
+   var first = numToHex(h);
+   var second = numToHex(m);
+   var third = numToHex(s);
+
+   return ("#" + first + second + third);
+}
+
 
 
 function getTime() 
@@ -56,6 +114,57 @@ function getTime()
   var clockTime = h + ":" + m + ":" + s;
 
   return clockTime;
+
+}
+
+
+
+/* 
+
+converts number from 0-15 to hexidecimal value
+
+*/
+
+
+function hex(num)
+{
+  if (num >15){
+    return null
+  }
+  
+  letters = ['A','B','C','D','E','F']
+  if (num > 9)
+  {
+    return letters[(num-10)];
+  }
+  return ("" + num);
+}
+
+/*
+
+converts larger numbers to hexidecimal using above function
+
+*/
+
+function numToHex(num)
+{
+  var rem = [];
+
+  var temp = num;
+
+  var i = 0;
+
+  while (temp > 0)
+  {
+    rem[i] = hex(temp % 16);
+
+    temp = Math.floor(temp/16);
+
+    i++
+
+  }
+
+  return rem.reverse().join("")
 
 }
 

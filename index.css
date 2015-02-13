@@ -5,11 +5,27 @@
 
 .clockDiv {
 	position: absolute;
-	left: 26%;
-	top: 20%;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
 	color: white;
 	font-size: 4em;
 	border-bottom: 10px solid white;
+}
+
+.hexDiv {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	color: white;
+	font-size: 4em;
+	border-bottom: 10px solid white;
+	width: 55%;
+}
+
+.hidden {
+	display: none;
 }
 
 h1 {
